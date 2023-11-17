@@ -129,12 +129,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Front.h" />
+    <ClInclude Include="SideSciana.h" />
+    <ClInclude Include="Top.h" />
+    <ClInclude Include="includes.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Front.cpp" />
+    <ClCompile Include="SideSciana.cpp" />
+    <ClCompile Include="Top.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Wheel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WindowsProject1.rc" />

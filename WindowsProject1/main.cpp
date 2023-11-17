@@ -1,41 +1,8 @@
-// Gl_template.c
-//Wy³šczanie b³êdów przed "fopen"
-#define  _CRT_SECURE_NO_WARNINGS
-
-#include <iostream>
-
-// £adowanie bibliotek:
-
-#ifdef _MSC_VER                         // Check if MS Visual C compiler
-#  pragma comment(lib, "opengl32.lib")  // Compiler-specific directive to avoid manually configuration
-#  pragma comment(lib, "glu32.lib")     // Link libraries
-#endif
-
-
-
-
-// Ustalanie trybu tekstowego:
-#ifdef _MSC_VER        // Check if MS Visual C compiler
-#   ifndef _MBCS
-#      define _MBCS    // Uses Multi-byte character set
-#   endif
-#   ifdef _UNICODE     // Not using Unicode character set
-#      undef _UNICODE 
-#   endif
-#   ifdef UNICODE
-#      undef UNICODE 
-#   endif
-#endif
-#include <windows.h>            // Window defines
-#include <gl\gl.h>              // OpenGL
-#include <gl\glu.h>             // GLU library
-#include <math.h>				// Define for sqrt
-#include <stdio.h>
-#include "Resource.h"           // About box resource identifiers.
-
-#define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
-#define BITMAP_ID 0x4D42		// identyfikator formatu BMP
-#define GL_PI 3.14
+#include "includes.h"
+#include "Wheel.h"
+#include "Top.h"
+#include "SideSciana.h"
+#include "Front.h"
 
 // Color Palette handle
 HPALETTE hPalette = NULL;
@@ -151,7 +118,7 @@ void ChangeSize(GLsizei w, GLsizei h)
 
 	// Establish perspective: 
 	/*
-	gluPerspective(60.0f,fAspect,1.0,400);
+	gluPerspective(45.0f,1.0,0,400);
 	*/
 
 	glMatrixMode(GL_MODELVIEW);
@@ -288,9 +255,6 @@ void kula(void)
 	glDisable(GL_TEXTURE_2D);
 }
 
-
-
-
 // LoadBitmapFile
 // opis: ³aduje mapê bitow¹ z pliku i zwraca jej adres.
 //       Wype³nia strukturê nag³ówka.
@@ -422,7 +386,7 @@ void szescian(void)
 		glVertex3fv(sf);
 		glVertex3fv(se);
 		glEnd();
-	}
+	};
 }
 
 void walec(double r, double h)
@@ -459,6 +423,7 @@ void walec(double r, double h)
 	}
 	glEnd();
 }
+
 void ramie(double r1, double r2, double h, double d)
 {
 	double PI = 3.14, alpha, x, y;
@@ -529,6 +494,13 @@ void ramie(double r1, double r2, double h, double d)
 // Called to draw scene
 void RenderScene(void)
 {
+	Top top = Top(50, 20, 30, 0, 0, 0);
+	Wheel wheel = Wheel(40, 40, 0, 0, 0);
+	SideSciana sciana1 = SideSciana(150, 20, 30, -70 ,60 ,0);
+	SideSciana sciana2 = SideSciana(150, 20, 30, -70 ,0 ,0);
+	Front front = Front(1,75,20, -74,5,0);
+
+	
 	//float normal[3];	// Storeage for calculated surface normal
 
 	// Clear the window with current clearing color
@@ -542,12 +514,16 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
-	//szescian();
-
+	
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
-	glPolygonMode(GL_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	//walec(40, 40);
-	kula();
+	sciana1.draw();
+	sciana2.draw();
+	glColor3f(1.0, 0.0, 0.0);
+	front.draw();
+
+	
 	//Uzyskanie siatki:
 	//glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 
@@ -713,7 +689,7 @@ int APIENTRY WinMain(HINSTANCE       hInst,
 
 		// Window position and size
 		50, 50,
-		400, 400,
+		800, 800,
 		NULL,
 		NULL,
 		hInstance,
