@@ -491,10 +491,58 @@ void ramie(double r1, double r2, double h, double d)
 	}
 	glEnd();
 }
+
+void top() {
+	GLfloat width{ 15.0 }, length{ 30.0 }, height{ 10.0 };
+	GLfloat widthBase{ 25.0 };
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); {
+		glFrontFace(GL_CW);
+		glBegin(GL_TRIANGLE_STRIP);
+		glColor3d(1., 0.0, 0.);
+		glVertex3f(0.f, 0.f, 0.f);
+		glVertex3f(0.f, length, 0.f);
+		glVertex3f(width, 0.f, 0.f);
+		glVertex3f(width, length, 0.f);
+		glEnd();
+		
+		// prawaja stena
+		glBegin(GL_TRIANGLE_STRIP);
+		glColor3d(1., 0.0, 0.);
+		glVertex3f(width, length, 0.f);
+		glVertex3f(width+(widthBase-width)/2, -height, -height);
+		glVertex3f(width + (widthBase - width) / 2, length+(45.f-length)/3, -height);
+		glEnd();
+		
+		//lewaja stena
+		glBegin(GL_TRIANGLE_STRIP);
+		glColor3d(1., 0.0, 0.);
+		glVertex3f(0.f,0.f,0.f);
+		glVertex3f(0.f, length, 0.f);
+		glVertex3f(-5.f, -10, -height);
+		glVertex3f(-5.f, length + (45.f - length) / 3, -height);
+		glEnd();
+
+		//pered
+		glBegin(GL_TRIANGLE_STRIP);
+		glColor3d(1., 0.0, 0.);
+		glVertex3f(width,0.f,0.f);
+		glVertex3f(-5.f, -10.f, -height);
+		glVertex3f(20.f, -10.f, -height);
+		glEnd();
+
+		//zad
+		glBegin(GL_TRIANGLE_STRIP);
+		glColor3d(1., 0.0, 0.);
+		glVertex3f(0.f, length, 0.f);
+		glVertex3f(20.f, length + (45.f - length) / 3, -height);
+		glVertex3f(-5.f, length + (45.f - length) / 3, -height);
+		glEnd();
+	}
+}
 // Called to draw scene
 void RenderScene(void)
 {
-	Top top = Top(50, 20, 30, 0, 0, 0);
+	//Top top = Top(50, 20, 30, 0, 0, 0);
 	Wheel wheel = Wheel(40, 40, 0, 0, 0);
 	SideSciana sciana1 = SideSciana(150, 20, 30, -70 ,60 ,0);
 	SideSciana sciana2 = SideSciana(150, 20, 30, -70 ,0 ,0);
@@ -518,10 +566,12 @@ void RenderScene(void)
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	//walec(40, 40);
-	sciana1.draw();
+	/*sciana1.draw();
 	sciana2.draw();
 	glColor3f(1.0, 0.0, 0.0);
-	front.draw();
+	front.draw();*/
+
+	top();
 
 	
 	//Uzyskanie siatki:

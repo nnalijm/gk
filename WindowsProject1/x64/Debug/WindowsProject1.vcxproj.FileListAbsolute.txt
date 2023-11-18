@@ -1,2 +1,3 @@
 C:\Users\user\Desktop\WindowsProject1\x64\Debug\GK_PROJECT.exe
 C:\Users\user\Desktop\gk\WindowsProject1\x64\Debug\GK_PROJECT.exe
+C:\Users\stas\Desktop\gk\WindowsProject1\x64\Debug\GK_PROJECT.exe
