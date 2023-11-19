@@ -15,11 +15,11 @@ private:
 
 	float posZ{};
 	
-	void sciana() const;
+	void sciana(const float, const float, const float, const float) const;
 
-	void lightsaber(const float, const float) const;
+	void lightsaber(const float, const float, const float, const float) const;
 public:
-	Front(const float length, const float width, const float heigth, const float posX, const float posY, const float posZ);
+	Front(const float, const float, const float, const float, const float, const float);
 
 	void draw() const;
 };

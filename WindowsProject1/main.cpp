@@ -3,6 +3,7 @@
 #include "Top.h"
 #include "SideSciana.h"
 #include "Front.h"
+#include "Back.h"
 
 // Color Palette handle
 HPALETTE hPalette = NULL;
@@ -546,7 +547,8 @@ void RenderScene(void)
 	Wheel wheel = Wheel(40, 40, 0, 0, 0);
 	SideSciana sciana1 = SideSciana(150, 20, 30, -70 ,60 ,0);
 	SideSciana sciana2 = SideSciana(150, 20, 30, -70 ,0 ,0);
-	Front front = Front(1,75,20, -74,5,0);
+	Front front = Front(60, 75, 20, -70, 5, 0);
+	Back back = Back(10, 70, 20, 0, 0, 0);
 
 	
 	//float normal[3];	// Storeage for calculated surface normal
@@ -571,7 +573,7 @@ void RenderScene(void)
 	glColor3f(1.0, 0.0, 0.0);
 	front.draw();*/
 
-	top();
+	back.draw();
 
 	
 	//Uzyskanie siatki:

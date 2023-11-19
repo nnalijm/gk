@@ -130,7 +130,6 @@ void SideSciana::sciana() const
 		}
 		glEnd();
 	}
-
 }
 
 void SideSciana::draw() const

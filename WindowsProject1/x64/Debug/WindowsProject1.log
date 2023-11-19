@@ -1,7 +1,18 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (WindowsProject1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  main.cpp
-C:\Users\stas\Desktop\gk\WindowsProject1\main.cpp(313,30): warning C4018: '<': signed/unsigned mismatch
-C:\Users\stas\Desktop\gk\WindowsProject1\main.cpp(764,12): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
-C:\Users\stas\Desktop\gk\WindowsProject1\main.cpp(933,26): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\stas\Desktop\gk\WindowsProject1\main.cpp(934,26): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-  WindowsProject1.vcxproj -> C:\Users\stas\Desktop\gk\WindowsProject1\x64\Debug\GK_PROJECT.exe
+﻿C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (WindowsProject1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Back.cpp
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(19,24): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(33,20): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(51,18): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(59,17): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(67,18): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(75,17): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(86,35): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(94,26): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(106,32): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(114,32): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(129,23): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(140,17): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(148,17): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(159,124): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+C:\Users\user\Desktop\GK\WindowsProject1\Back.cpp(159,48): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+  WindowsProject1.vcxproj -> C:\Users\user\Desktop\GK\WindowsProject1\x64\Debug\GK_PROJECT.exe
