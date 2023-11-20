@@ -94,7 +94,7 @@ void calcNormal(float v[3][3], float out[3])
 // Change viewing volume and viewport.  Called when window is resized
 void ChangeSize(GLsizei w, GLsizei h)
 {
-	GLfloat nRange = 100.0f;
+	GLfloat nRange = 200.0f;
 	GLfloat fAspect;
 	// Prevent a divide by zero
 	if (h == 0)
@@ -117,144 +117,20 @@ void ChangeSize(GLsizei w, GLsizei h)
 	else
 		glOrtho(-nRange * w / h, nRange * w / h, -nRange, nRange, -nRange, nRange);
 
-	// Establish perspective: 
-	/*
-	gluPerspective(45.0f,1.0,0,400);
-	*/
-
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
 
 
-
-// This function does any needed initialization on the rendering
-// context.  Here it sets up and initializes the lighting for
-// the scene.
 void SetupRC()
 {
-	// Light values and coordinates
-	//GLfloat  ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };
-	//GLfloat  diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };
-	//GLfloat  specular[] = { 1.0f, 1.0f, 1.0f, 1.0f};
-	//GLfloat	 lightPos[] = { 0.0f, 150.0f, 150.0f, 1.0f };
-	//GLfloat  specref[] =  { 1.0f, 1.0f, 1.0f, 1.0f };
-
-
 	glEnable(GL_DEPTH_TEST);	// Hidden surface removal
 	glFrontFace(GL_CCW);		// Counter clock-wise polygons face out
-	//glEnable(GL_CULL_FACE);		// Do not calculate inside of jet
-
-	// Enable lighting
-	//glEnable(GL_LIGHTING);
-
-	// Setup and enable light 0
-	//glLightfv(GL_LIGHT0,GL_AMBIENT,ambientLight);
-	//glLightfv(GL_LIGHT0,GL_DIFFUSE,diffuseLight);
-	//glLightfv(GL_LIGHT0,GL_SPECULAR,specular);
-	//glLightfv(GL_LIGHT0,GL_POSITION,lightPos);
-	//glEnable(GL_LIGHT0);
-
-	// Enable color tracking
-	//glEnable(GL_COLOR_MATERIAL);
-
-	// Set Material properties to follow glColor values
-	//glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-
-	// All materials hereafter have full specular reflectivity
-	// with a high shine
-	//glMaterialfv(GL_FRONT, GL_SPECULAR,specref);
-	//glMateriali(GL_FRONT,GL_SHININESS,128);
-
-
-	// White background
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-	// Black brush
 	glColor3f(0.0, 0.0, 0.0);
 }
 
-void skrzynka(void)
-{
-	glColor3d(0.8, 0.7, 0.3);
 
-
-	glEnable(GL_TEXTURE_2D); // W³¹cz teksturowanie
-
-	glBindTexture(GL_TEXTURE_2D, texture[0]);
-	glBegin(GL_QUADS);
-	glNormal3d(0, 0, 1);
-	glTexCoord2d(1.0, 1.0); glVertex3d(25, 25, 25);
-	glTexCoord2d(0.0, 1.0); glVertex3d(-25, 25, 25);
-	glTexCoord2d(0.0, 0.0); glVertex3d(-25, -25, 25);
-	glTexCoord2d(1.0, 0.0); glVertex3d(25, -25, 25);
-	glEnd();
-	glBindTexture(GL_TEXTURE_2D, texture[1]);
-	glBegin(GL_QUADS);
-	glNormal3d(1, 0, 0);
-	glTexCoord2d(1.0, 1.0); glVertex3d(25, 25, 25);
-	glTexCoord2d(0.0, 1.0); glVertex3d(25, -25, 25);
-	glTexCoord2d(0.0, 0.0); glVertex3d(25, -25, -25);
-	glTexCoord2d(1.0, 0.0); glVertex3d(25, 25, -25);
-	glEnd();
-
-	glDisable(GL_TEXTURE_2D); // Wy³¹cz teksturowanie
-
-
-
-	glBegin(GL_QUADS);
-	glNormal3d(0, 0, -1);
-	glVertex3d(25, 25, -25);
-	glVertex3d(25, -25, -25);
-	glVertex3d(-25, -25, -25);
-	glVertex3d(-25, 25, -25);
-
-	glNormal3d(-1, 0, 0);
-	glVertex3d(-25, 25, -25);
-	glVertex3d(-25, -25, -25);
-	glVertex3d(-25, -25, 25);
-	glVertex3d(-25, 25, 25);
-
-	glNormal3d(0, 1, 0);
-	glVertex3d(25, 25, 25);
-	glVertex3d(25, 25, -25);
-	glVertex3d(-25, 25, -25);
-	glVertex3d(-25, 25, 25);
-
-	glNormal3d(0, -1, 0);
-	glVertex3d(25, -25, 25);
-	glVertex3d(-25, -25, 25);
-	glVertex3d(-25, -25, -25);
-	glVertex3d(25, -25, -25);
-	glEnd();
-}
-
-void walec01(void)
-{
-	GLUquadricObj* obj;
-	obj = gluNewQuadric();
-	gluQuadricNormals(obj, GLU_SMOOTH);
-	glColor3d(1, 0, 0);
-	glPushMatrix();
-	gluCylinder(obj, 20, 20, 30, 15, 7);
-	gluCylinder(obj, 0, 20, 0, 15, 7);
-	glTranslated(0, 0, 60);
-	glRotated(180.0, 0, 1, 0);
-	gluCylinder(obj, 0, 20, 30, 15, 7);
-	glPopMatrix();
-}
-
-void kula(void)
-{
-	GLUquadricObj* obj;
-	obj = gluNewQuadric();
-	gluQuadricTexture(obj, GL_TRUE);
-	glBindTexture(GL_TEXTURE_2D, texture[0]);
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	glColor3d(1.0, 0.8, 0.8);
-	glEnable(GL_TEXTURE_2D);
-	gluSphere(obj, 40, 15, 7);
-	glDisable(GL_TEXTURE_2D);
-}
 
 // LoadBitmapFile
 // opis: ³aduje mapê bitow¹ z pliku i zwraca jej adres.
@@ -322,233 +198,27 @@ unsigned char* LoadBitmapFile(char* filename, BITMAPINFOHEADER* bitmapInfoHeader
 	fclose(filePtr);
 	return bitmapImage;
 }
-void szescian(void)
-{
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	{
-		// Parametry wierzcholkow
-
-		GLfloat sa[3] = { 0.0f,0.0f,0.0f };
-		GLfloat sb[3] = { 10.0f,0.0f,0.0f };
-		GLfloat sc[3] = { 10.0f,10.0f,0.0f };
-		GLfloat sd[3] = { 0.0f,10.0f,0.0f };
-		GLfloat se[3] = { 0.0f,0.0f,-10.0f };
-		GLfloat sf[3] = { 10.0f,0.0f,-10.0f };
-		GLfloat sg[3] = { 10.0f,10.0f,-10.0f };
-		GLfloat sh[3] = { 0.0f,10.0f,-10.0f };
-
-
-		// Sciany skladowe
-		/*
-		glColor3f(1.0f, 0.0f, 0.0f);
-		glBegin(GL_POLYGON);
-		glVertex3fv(sa);
-		glVertex3fv(sb);
-		glVertex3fv(sc);
-		glVertex3fv(sd);
-		glEnd();
-		*/
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glBegin(GL_POLYGON);
-		glVertex3fv(sb);
-		glVertex3fv(sf);
-		glVertex3fv(sg);
-		glVertex3fv(sc);
-		glEnd();
-
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glBegin(GL_POLYGON);
-		glVertex3fv(sf);
-		glVertex3fv(se);
-		glVertex3fv(sh);
-		glVertex3fv(sg);
-		glEnd();
-
-		glColor3f(1.0f, 1.0f, 0.0f);
-		glBegin(GL_POLYGON);
-		glVertex3fv(se);
-		glVertex3fv(sa);
-		glVertex3fv(sd);
-		glVertex3fv(sh);
-		glEnd();
-
-		glColor3f(0.0f, 1.0f, 1.0f);
-		glBegin(GL_POLYGON);
-		glVertex3fv(sd);
-		glVertex3fv(sc);
-		glVertex3fv(sg);
-		glVertex3fv(sh);
-		glEnd();
-
-		glColor3f(1.0f, 0.0f, 1.0f);
-		glBegin(GL_POLYGON);
-		glVertex3fv(sa);
-		glVertex3fv(sb);
-		glVertex3fv(sf);
-		glVertex3fv(se);
-		glEnd();
-	};
-}
-
-void walec(double r, double h)
-{
-	double x, y, alpha, PI = 3.14;
-	glBegin(GL_TRIANGLE_FAN);
-	glColor3d(0.8, 0.0, 0);
-	glVertex3d(0, 0, 0);
-	for (alpha = 0; alpha <= 2 * PI; alpha += PI / 8.0)
-	{
-		x = r * sin(alpha);
-		y = r * cos(alpha);
-		glVertex3d(x, y, 0);
-	}
+void top( float length, float width, float heigth, float posX, const float posY, float posZ){
+	glColor3f(0.5f, 0.5f, 0.5f);
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(-15, heigth, 10);
+	glVertex3f(25, heigth, 10);
+	glVertex3f(-15, heigth, 70);
+	glVertex3f(25, heigth, 70);
 	glEnd();
-
-	glBegin(GL_QUAD_STRIP);
-	for (alpha = 0.0; alpha <= 2 * PI; alpha += PI / 8.0)
-	{
-		x = r * sin(alpha);
-		y = r * cos(alpha);
-		glVertex3d(x, y, 0);
-		glVertex3d(x, y, h);
-	}
-	glEnd();
-
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex3d(0, 0, h);
-	for (alpha = 0; alpha >= -2 * PI; alpha -= PI / 8.0)
-	{
-		x = r * sin(alpha);
-		y = r * cos(alpha);
-		glVertex3d(x, y, h);
-	}
-	glEnd();
-}
-
-void ramie(double r1, double r2, double h, double d)
-{
-	double PI = 3.14, alpha, x, y;
-	glBegin(GL_TRIANGLE_FAN);
-	glColor3d(0.8, 0.0, 0);
-	glVertex3d(0, 0, 0);
-	for (alpha = PI; alpha <= 2 * PI; alpha += PI / 8.0)
-	{
-		x = r1 * sin(alpha);
-		y = r1 * cos(alpha);
-		glVertex3d(x, y, 0);
-	}
-	glEnd();
-
-	glBegin(GL_QUAD_STRIP);
-	for (alpha = 0; alpha >= -PI; alpha -= PI / 8.0)
-	{
-		x = r1 * sin(alpha);
-		y = r1 * cos(alpha);
-		glVertex3d(x, y, h);
-		glVertex3d(x, y, 0);
-	}
-	glEnd();
-
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex3d(0, 0, h);
-	for (alpha = 0; alpha >= -PI; alpha -= PI / 8.0)
-	{
-		x = r1 * sin(alpha);
-		y = r1 * cos(alpha);
-		glVertex3d(x, y, h);
-	}
-	glEnd();
-
-	glBegin(GL_TRIANGLE_FAN);
-	glColor3d(0.8, 0.0, 0);
-	//glVertex3d(d,r2,0);
-	//glVertex3d(d, r2, h);
-	for (alpha = 0; alpha <= PI; alpha += PI / 8.0)
-	{
-		x = d + r2 * sin(alpha);
-		y = d + r2 * cos(alpha);
-		glVertex3d(x, y, 0);
-	}
-	glEnd();
-
-	glBegin(GL_QUAD_STRIP);
-	//glVertex3d(d, r2, 0);
-	for (alpha = 0; alpha <= PI; alpha += PI / 8.0)
-	{
-		x = d + r2 * sin(alpha);
-		y = d + r2 * cos(alpha);
-		glVertex3d(x, y, h);
-		glVertex3d(x, y, 0);
-	}
-	glEnd();
-
-	glBegin(GL_TRIANGLE_FAN);
-	//glVertex3d(d, r2, h);
-	for (alpha = 0; alpha <= PI; alpha += PI / 8.0)
-	{
-		x = d + r2 * sin(alpha);
-		y = d + r2 * cos(alpha);
-		glVertex3d(x, y, h);
-	}
-	glEnd();
-}
-
-void top() {
-	GLfloat width{ 15.0 }, length{ 30.0 }, height{ 10.0 };
-	GLfloat widthBase{ 25.0 };
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); {
-		glFrontFace(GL_CW);
-		glBegin(GL_TRIANGLE_STRIP);
-		glColor3d(1., 0.0, 0.);
-		glVertex3f(0.f, 0.f, 0.f);
-		glVertex3f(0.f, length, 0.f);
-		glVertex3f(width, 0.f, 0.f);
-		glVertex3f(width, length, 0.f);
-		glEnd();
-		
-		// prawaja stena
-		glBegin(GL_TRIANGLE_STRIP);
-		glColor3d(1., 0.0, 0.);
-		glVertex3f(width, length, 0.f);
-		glVertex3f(width+(widthBase-width)/2, -height, -height);
-		glVertex3f(width + (widthBase - width) / 2, length+(45.f-length)/3, -height);
-		glEnd();
-		
-		//lewaja stena
-		glBegin(GL_TRIANGLE_STRIP);
-		glColor3d(1., 0.0, 0.);
-		glVertex3f(0.f,0.f,0.f);
-		glVertex3f(0.f, length, 0.f);
-		glVertex3f(-5.f, -10, -height);
-		glVertex3f(-5.f, length + (45.f - length) / 3, -height);
-		glEnd();
-
-		//pered
-		glBegin(GL_TRIANGLE_STRIP);
-		glColor3d(1., 0.0, 0.);
-		glVertex3f(width,0.f,0.f);
-		glVertex3f(-5.f, -10.f, -height);
-		glVertex3f(20.f, -10.f, -height);
-		glEnd();
-
-		//zad
-		glBegin(GL_TRIANGLE_STRIP);
-		glColor3d(1., 0.0, 0.);
-		glVertex3f(0.f, length, 0.f);
-		glVertex3f(20.f, length + (45.f - length) / 3, -height);
-		glVertex3f(-5.f, length + (45.f - length) / 3, -height);
-		glEnd();
-	}
 }
 // Called to draw scene
 void RenderScene(void)
 {
 	//Top top = Top(50, 20, 30, 0, 0, 0);
-	Wheel wheel = Wheel(40, 40, 0, 0, 0);
+	Wheel wheel1 = Wheel(15, 15, 70, 0, 0);
+	Wheel wheel2 = Wheel(15, 15, 70, 60, 0);
+	Wheel wheel3 = Wheel(15, 15, -40, 0, 0);
+	Wheel wheel4 = Wheel(15, 15, -40, 60, 0);
 	SideSciana sciana1 = SideSciana(150, 20, 30, -70 ,60 ,0);
 	SideSciana sciana2 = SideSciana(150, 20, 30, -70 ,0 ,0);
 	Front front = Front(60, 75, 20, -70, 5, 0);
-	Back back = Back(10, 70, 20, 0, 0, 0);
+	Back back = Back(10, 80, 30, -70, 0, 0);
 
 	
 	//float normal[3];	// Storeage for calculated surface normal
@@ -566,14 +236,22 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	//walec(40, 40);
 	/*sciana1.draw();
 	sciana2.draw();
 	glColor3f(1.0, 0.0, 0.0);
 	front.draw();*/
-
+	wheel1.draw();
+	wheel2.draw();
+	wheel3.draw();
+	wheel4.draw();
+	sciana1.draw();
+	sciana2.draw();
 	back.draw();
+	top(0,0,60,0,0,0);
+
+	//back.draw();
 
 	
 	//Uzyskanie siatki:

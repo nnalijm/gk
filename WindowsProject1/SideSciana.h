@@ -23,7 +23,7 @@ private:
 
 	void sciana() const;
 public:
-	SideSciana(const float, const float, const float, const float, const float, const float);
+	SideSciana(const float length, const float width, const float heigth, const float posX, const float posY, const float posZ);
 
 	void draw() const;
 };

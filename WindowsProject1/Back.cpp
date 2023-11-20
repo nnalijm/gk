@@ -99,7 +99,7 @@ void Back::rama(const float length, const float width, const float heigth, const
 	for (float z = posZ; z < posZ + heigth; z += 1.0)
 	{
 		glBegin(GL_TRIANGLE_STRIP);
-		glColor3f(1.0, 0.0, 0.0);
+		glColor3f(1.0, 1.0, 0.0);
 		for (float y = posY; y <= this->posY; y += 1.0)
 		{
 			glVertex3f(posX + length, z, y);
@@ -158,4 +158,5 @@ void Back::draw() const
 	glColor3f(1.0, 1.0, 0.0);
 	this->rama(this->length, this->width + 4, 0.2 * this->heigth, this->posX - 2, this->posY - 2, (this->posZ + this->heigth) * 0.2);
 	this->lightsaber(4, 5, 5, this->posX - 2, this->posY, this->posZ);
+	this->lightsaber(4, 5, 5, this->posX - 2, this->posY+75, this->posZ);
 }
