@@ -242,6 +242,7 @@ void RenderScene(void)
 	sciana2.draw();
 	glColor3f(1.0, 0.0, 0.0);
 	front.draw();*/
+	/*
 	wheel1.draw();
 	wheel2.draw();
 	wheel3.draw();
@@ -250,6 +251,8 @@ void RenderScene(void)
 	sciana2.draw();
 	back.draw();
 	top(0,0,60,0,0,0);
+	*/
+	front.draw();
 
 	//back.draw();
 
