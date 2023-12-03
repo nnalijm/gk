@@ -199,13 +199,242 @@ unsigned char* LoadBitmapFile(char* filename, BITMAPINFOHEADER* bitmapInfoHeader
 	return bitmapImage;
 }
 void top( float length, float width, float heigth, float posX, const float posY, float posZ){
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glColor3f(0.5f, 0.5f, 0.5f);
 	glBegin(GL_TRIANGLE_STRIP);
-	glVertex3f(-15, heigth, 10);
-	glVertex3f(25, heigth, 10);
-	glVertex3f(-15, heigth, 70);
-	glVertex3f(25, heigth, 70);
+	glVertex3f(-15, heigth, 25);
+	glVertex3f(25, heigth, 25);
+	glVertex3f(-15, heigth, 55);
+	glVertex3f(25, heigth, 55);
 	glEnd();
+
+
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(-15, heigth, 25);
+	glVertex3f(-15 - 25 / tan(3.14 / 4), heigth - 25, 25 - 25 / tan(3.14/4));
+	glVertex3f(-15, heigth, 25+1);
+	glVertex3f(-15 - 25 / tan(3.14 / 4), heigth - 25, 25 - 25 / tan(3.14/4) + 1);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(-15, heigth, 25);
+	glVertex3f(-15 - 1/tan(3.14/4), heigth - 1, 25 - 1/tan(3.14/4));
+	glVertex3f(-15, heigth, 55);
+	glVertex3f(-15 - 1/tan(3.14/4), heigth - 1, 55 + 1 / tan(3.14/4));
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(-15, heigth, 55);
+	glVertex3f( -15 - 25 / tan(3.14 / 4), heigth - 25, 55 + 25 / tan(3.14 / 4));
+	glVertex3f(-15, heigth, 55-1);
+	glVertex3f(-15 - 25 / tan(3.14/4) , heigth - 25, 55 + 25 / tan(3.14/4) -1 );
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(-15 - 25 / tan(3.14 / 4), heigth - 25, 25 - 25 / tan(3.14 / 4));
+	glVertex3f(-15 - 24 / tan(3.14 / 4), heigth - 24, 25 - 24 / tan(3.14 / 4));
+	glVertex3f(-15 - 25 / tan(3.14 / 4), heigth - 25, 55 + 25 / tan(3.14 / 4));
+	glVertex3f(-15 - 24 / tan(3.14 / 4), heigth - 24, 55 + 24 / tan(3.14 / 4));
+	glEnd();
+
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(0.f, 0.f, 0.55f);
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(-15 - 1 / tan(3.14 / 4), heigth - 1, 25+0.2);
+	for (GLfloat i = 2.4; i <= 79.2; i+=2.4)
+		glVertex3f(-15 - 23.8 / tan(3.14 / 4), heigth - 23.8, i);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(-15 - 1 / tan(3.14 / 4), heigth - 1, 55 - 0.2);
+	for (GLfloat i = 2.4; i <= 79.2; i += 2.4)
+		glVertex3f(-15 - 23.8 / tan(3.14 / 4), heigth - 23.8, i);
+	glEnd();
+
+	
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(-15 - 24 / tan(3.14 / 4), heigth - 24, 2.4);
+	for (GLfloat i = 25.2; i <= 55.2; i += 2.4)
+		glVertex3f(-15 - 1.2/ tan(3.14 / 4), heigth - 1.2, i);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(-15 - 24 / tan(3.14 / 4), heigth - 24, 77.6);
+	for (GLfloat i = 25.2; i <= 55.2; i += 2.4)
+		glVertex3f(-15 - 1.2 / tan(3.14 / 4), heigth - 1.2, i);
+	glEnd();
+
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glColor3f(0.5f, 0.5f, 0.5f);
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(25, heigth, 25);
+	glVertex3f(25 + 25 / tan(3.14 / 6), heigth - 25, 25 - 25 / tan(3.14 / 4));
+	glVertex3f(25, heigth, 25 + 1);
+	glVertex3f(25 + 25 / tan(3.14 / 6), heigth - 25, 25 - 25 / tan(3.14 / 4) + 1);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(25, heigth, 25);
+	glVertex3f(25 + 1 / tan(3.14 / 6), heigth - 1, 25 - 1 / tan(3.14 / 4));
+	glVertex3f(25, heigth, 55);
+	glVertex3f(25 + 1 / tan(3.14 / 6), heigth - 1, 55 + 1 / tan(3.14 / 4));
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(25, heigth, 55);
+	glVertex3f(25 + 25 / tan(3.14 / 6), heigth - 25, 55 + 25 / tan(3.14 / 4));
+	glVertex3f(25, heigth, 55 - 1);
+	glVertex3f(25 + 25 / tan(3.14 / 6), heigth - 25, 55 + 25 / tan(3.14 / 4) - 1);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(25 + 25 / tan(3.14 / 6), heigth - 25, 25 - 25 / tan(3.14 / 4));
+	glVertex3f(25 + 24 / tan(3.14 / 6), heigth - 24, 25 - 24 / tan(3.14 / 4));
+	glVertex3f(25 + 25 / tan(3.14 / 6), heigth - 25, 55 + 25 / tan(3.14 / 4));
+	glVertex3f(25 + 24 / tan(3.14 / 6), heigth - 24, 55 + 24 / tan(3.14 / 4));
+	glEnd();
+
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(0.f, 0.f, 0.55f);
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(25 + 1 / tan(3.14 / 6), heigth - 1, 25 + 0.2);
+	for (GLfloat i = 2.4; i <= 79.2; i += 2.4)
+		glVertex3f(25 + 23.8 / tan(3.14 / 6), heigth - 23.8, i);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(25 + 1 / tan(3.14 / 6), heigth - 1, 55 - 0.2);
+	for (GLfloat i = 2.4; i <= 79.2; i += 2.4)
+		glVertex3f(25 + 23.8 / tan(3.14 / 6), heigth - 23.8, i);
+	glEnd();
+
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(25 + 24 / tan(3.14 / 6), heigth - 24, 2.4);
+	for (GLfloat i = 25.2; i <= 55.2; i += 2.4)
+		glVertex3f(25 + 1.2 / tan(3.14 / 6), heigth - 1.2, i);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(25 + 24 / tan(3.14 / 6), heigth - 24, 77.6);
+	for (GLfloat i = 25.2; i <= 55.2; i += 2.4)
+		glVertex3f(25 + 1.2 / tan(3.14 / 6), heigth - 1.2, i);
+	glEnd();
+
+
+
+	// prawaja storona
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glColor3f(0.5f, 0.5f, 0.5f);
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(-15, heigth, 55);
+	glVertex3f(-15 + 1, heigth, 55);
+	glVertex3f(-15 - 25 / tan(3.14 / 4), heigth - 25, 55+25);
+	glVertex3f(-15 - 25 / tan(3.14 / 4) + 1, heigth - 25 ,55+25);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(-15, heigth, 55);
+	glVertex3f(25, heigth, 55);
+	glVertex3f(-15 - 1 / tan(3.14 / 4), heigth - 1, 55 + 1 / tan(3.14 / 4));
+	glVertex3f(25 + 1 / tan(3.14 / 4), heigth -1, 55 + 1 / tan(3.14 / 4));
+	glEnd();
+
+	
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(25, heigth, 55);
+	glVertex3f(25 - 1, heigth, 55);
+	glVertex3f(25 + 25 / tan(3.14 / 6), heigth - 25, 55 + 25 / tan(3.14 / 4));
+	glVertex3f(25 + 25 / tan(3.14 / 6) - 1, heigth - 25, 55 + 25 / tan(3.14 / 4));
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(-15 - 25 / tan(3.14 / 4), heigth - 25, 55 + 25 / tan(3.14 / 4));
+	glVertex3f(25 + 25 / tan(3.14 / 6), heigth - 25, 55 + 25 / tan(3.14 / 4));
+	glVertex3f(-15 - 24 / tan(3.14 / 4), heigth - 24, 55 + 24 / tan(3.14 / 4));
+	glVertex3f(25 + 24 / tan(3.14 / 6), heigth - 24, 55 + 24 / tan(3.14 / 4));
+	glEnd();
+
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(0.f, 0.f, 0.55f);
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(-14.6, heigth - 1, 55);
+	for (GLfloat i = -15 - 25 / tan(3.14 / 4) + 2.2; i < 66; i += 2.4)
+		glVertex3f(i, heigth - 23.8, 79);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(25, heigth - 1, 55);
+	for (GLfloat i = -15 - 25 / tan(3.14 / 4) + 2.2; i < 66; i += 2.4)
+		glVertex3f(i, heigth - 23.8, 79);
+	glEnd();
+
+
+
+
+
+	// lewaja storona
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glColor3f(0.5f, 0.5f, 0.5f);
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(25, heigth, 25);
+	glVertex3f(25 - 1, heigth, 25);
+	glVertex3f(25 + 25 / tan(3.14 / 6), heigth - 25, 25 - 25 / tan(3.14 / 4));
+	glVertex3f(25 + 25 / tan(3.14 / 6) - 1, heigth - 25, 25 - 25 / tan(3.14 / 4));
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(25, heigth, 25);
+	glVertex3f(25 + 1 / tan(3.14 / 6), heigth - 1, 25 - 1 / tan(3.14 / 4));
+	glVertex3f(-15, heigth, 25);
+	glVertex3f(-15 - 1 / tan(3.14 / 4), heigth - 1, 25 - 1 / tan(3.14 / 4));
+	
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(-15, heigth, 25);
+	glVertex3f(-15 + 1, heigth, 25);
+	glVertex3f(-15 - 25 / tan(3.14 / 4), heigth - 25, 0);
+	glVertex3f(-15 - 25 / tan(3.14 / 4) + 1, heigth - 25, 0);
+	glEnd();
+
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(-15 - 25 / tan(3.14 / 4), heigth - 25, 0);
+	glVertex3f(25 + 25 / tan(3.14 / 6), heigth - 25, 0);
+	glVertex3f(-15 - 24 / tan(3.14 / 4), heigth - 24, 0);
+	glVertex3f(25 + 24 / tan(3.14 / 6), heigth - 24, 0);
+	glEnd();
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(0.f, 0.f, 0.55f);
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(-14.6, heigth - 1, 25);
+	for (GLfloat i = -15 - 25 / tan(3.14 / 4) + 2.2; i < 66; i += 2.4)
+		glVertex3f(i, heigth - 23.8, 1);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(25, heigth - 1, 25);
+	for (GLfloat i = -15 - 25 / tan(3.14 / 4) + 2.2; i < 66; i += 2.4)
+		glVertex3f(i, heigth - 23.8, 1);
+	glEnd();
+
+
 }
 // Called to draw scene
 void RenderScene(void)
@@ -236,13 +465,13 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	//walec(40, 40);
 	/*sciana1.draw();
 	sciana2.draw();
 	glColor3f(1.0, 0.0, 0.0);
 	front.draw();*/
-	/*
+	
 	wheel1.draw();
 	wheel2.draw();
 	wheel3.draw();
@@ -250,9 +479,12 @@ void RenderScene(void)
 	sciana1.draw();
 	sciana2.draw();
 	back.draw();
-	top(0,0,60,0,0,0);
-	*/
 	front.draw();
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	top(0,0, 55,0,0,0);
+	
+	//front.draw();
 
 	//back.draw();
 
