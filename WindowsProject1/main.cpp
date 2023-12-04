@@ -94,7 +94,7 @@ void calcNormal(float v[3][3], float out[3])
 // Change viewing volume and viewport.  Called when window is resized
 void ChangeSize(GLsizei w, GLsizei h)
 {
-	GLfloat nRange = 200.0f;
+	GLfloat nRange = 300.0f;
 	GLfloat fAspect;
 	// Prevent a divide by zero
 	if (h == 0)
@@ -245,20 +245,20 @@ void top( float length, float width, float heigth, float posX, const float posY,
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(-15 - 1 / tan(3.14 / 4), heigth - 1, 25+0.2);
-	for (GLfloat i = 2.4; i <= 79.2; i+=2.4)
+	for (GLfloat i = 2.4; i < 78; i+=1.2)
 		glVertex3f(-15 - 23.8 / tan(3.14 / 4), heigth - 23.8, i);
 	glEnd();
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(-15 - 1 / tan(3.14 / 4), heigth - 1, 55 - 0.2);
-	for (GLfloat i = 2.4; i <= 79.2; i += 2.4)
+	for (GLfloat i = 2.4; i < 78; i += 1.2)
 		glVertex3f(-15 - 23.8 / tan(3.14 / 4), heigth - 23.8, i);
 	glEnd();
 
 	
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(-15 - 24 / tan(3.14 / 4), heigth - 24, 2.4);
-	for (GLfloat i = 25.2; i <= 55.2; i += 2.4)
+	for (GLfloat i = 25.2; i <= 55.2; i += 1.2)
 		glVertex3f(-15 - 1.2/ tan(3.14 / 4), heigth - 1.2, i);
 	glEnd();
 
@@ -306,26 +306,26 @@ void top( float length, float width, float heigth, float posX, const float posY,
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(25 + 1 / tan(3.14 / 6), heigth - 1, 25 + 0.2);
-	for (GLfloat i = 2.4; i <= 79.2; i += 2.4)
+	for (GLfloat i = 2.4; i <= 79.2; i += 1.2)
 		glVertex3f(25 + 23.8 / tan(3.14 / 6), heigth - 23.8, i);
 	glEnd();
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(25 + 1 / tan(3.14 / 6), heigth - 1, 55 - 0.2);
-	for (GLfloat i = 2.4; i <= 79.2; i += 2.4)
+	for (GLfloat i = 2.4; i <= 79.2; i += 1.2)
 		glVertex3f(25 + 23.8 / tan(3.14 / 6), heigth - 23.8, i);
 	glEnd();
 
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(25 + 24 / tan(3.14 / 6), heigth - 24, 2.4);
-	for (GLfloat i = 25.2; i <= 55.2; i += 2.4)
+	for (GLfloat i = 25.2; i <= 55.2; i += 1.2)
 		glVertex3f(25 + 1.2 / tan(3.14 / 6), heigth - 1.2, i);
 	glEnd();
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(25 + 24 / tan(3.14 / 6), heigth - 24, 77.6);
-	for (GLfloat i = 25.2; i <= 55.2; i += 2.4)
+	for (GLfloat i = 25.2; i <= 55.2; i += 1.2)
 		glVertex3f(25 + 1.2 / tan(3.14 / 6), heigth - 1.2, i);
 	glEnd();
 
@@ -370,16 +370,27 @@ void top( float length, float width, float heigth, float posX, const float posY,
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(-14.6, heigth - 1, 55);
-	for (GLfloat i = -15 - 25 / tan(3.14 / 4) + 2.2; i < 66; i += 2.4)
+	for (GLfloat i = -15 - 25 / tan(3.14 / 4) + 2.2; i < 66; i += 1.2)
 		glVertex3f(i, heigth - 23.8, 79);
 	glEnd();
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(25, heigth - 1, 55);
-	for (GLfloat i = -15 - 25 / tan(3.14 / 4) + 2.2; i < 66; i += 2.4)
+	for (GLfloat i = -15 - 25 / tan(3.14 / 4) + 2.2; i < 66; i += 1.2)
 		glVertex3f(i, heigth - 23.8, 79);
 	glEnd();
 
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(66, heigth - 24, 79);
+	for (GLfloat i = -14.6; i<25; i+=1.2)
+		glVertex3f(i, heigth - 1, 55);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(-13 - 25/tan(3.14/4), heigth - 24, 79);
+	for (GLfloat i = -14.6; i < 25; i += 1.2)
+		glVertex3f(i, heigth - 1, 55);
+	glEnd();
 
 
 
@@ -434,6 +445,18 @@ void top( float length, float width, float heigth, float posX, const float posY,
 		glVertex3f(i, heigth - 23.8, 1);
 	glEnd();
 
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(66, heigth - 24, 1);
+	for (GLfloat i = 25; i > -15; i -= 2.4)
+		glVertex3f(i, heigth - 1, 25);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex3f(-13-25/tan(3.14/4), heigth - 24, 1);
+	for (GLfloat i = 25; i > -16; i -= 2.4)
+		glVertex3f(i, heigth - 1, 25);
+	glEnd();
+
 
 }
 // Called to draw scene
@@ -444,10 +467,14 @@ void RenderScene(void)
 	Wheel wheel2 = Wheel(15, 15, 70, 60, 0);
 	Wheel wheel3 = Wheel(15, 15, -40, 0, 0);
 	Wheel wheel4 = Wheel(15, 15, -40, 60, 0);
-	SideSciana sciana1 = SideSciana(150, 20, 30, -70 ,60 ,0);
-	SideSciana sciana2 = SideSciana(150, 20, 30, -70 ,0 ,0);
+	SideSciana sciana1 = SideSciana(150, 20, 30, -70, 60, 0);
+	SideSciana sciana2 = SideSciana(150, 20, 30, -70, 0, 0);
 	Front front = Front(60, 75, 20, -70, 5, 0);
 	Back back = Back(10, 80, 30, -70, 0, 0);
+
+	GLfloat cameraPos[3] = { 0.0f, 0.0f, 3.0f };
+	GLfloat cameraFront[3] = {0.0f, 0.0f, -1.0f};
+	GLfloat cameraUp[3] = { 0.0f, 1.0f, 0.0f };
 
 	
 	//float normal[3];	// Storeage for calculated surface normal
@@ -471,7 +498,7 @@ void RenderScene(void)
 	sciana2.draw();
 	glColor3f(1.0, 0.0, 0.0);
 	front.draw();*/
-	
+	gluLookAt(0.f, 10.f, 100.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f);
 	wheel1.draw();
 	wheel2.draw();
 	wheel3.draw();
@@ -479,7 +506,7 @@ void RenderScene(void)
 	sciana1.draw();
 	sciana2.draw();
 	back.draw();
-	front.draw();
+	//front.draw();
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	top(0,0, 55,0,0,0);
