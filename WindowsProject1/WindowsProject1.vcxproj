@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Back.h" />
+    <ClInclude Include="car.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Front.h" />
     <ClInclude Include="SideSciana.h" />
@@ -142,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Back.cpp" />
+    <ClCompile Include="car.cpp" />
     <ClCompile Include="Front.cpp" />
     <ClCompile Include="SideSciana.cpp" />
     <ClCompile Include="Top.cpp" />

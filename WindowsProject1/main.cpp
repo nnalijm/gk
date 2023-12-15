@@ -4,6 +4,7 @@
 #include "SideSciana.h"
 #include "Front.h"
 #include "Back.h"
+#include "car.h"
 
 // Color Palette handle
 HPALETTE hPalette = NULL;
@@ -476,6 +477,8 @@ void RenderScene(void)
 	GLfloat cameraFront[3] = {0.0f, 0.0f, -1.0f};
 	GLfloat cameraUp[3] = { 0.0f, 1.0f, 0.0f };
 
+	car cr = car(80, 80, 50);
+
 	
 	//float normal[3];	// Storeage for calculated surface normal
 
@@ -492,24 +495,23 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	//walec(40, 40);
 	/*sciana1.draw();
 	sciana2.draw();
 	glColor3f(1.0, 0.0, 0.0);
 	front.draw();*/
-	gluLookAt(0.f, 10.f, 100.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f);
-	wheel1.draw();
+	//gluLookAt(0.f, 10.f, 100.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f);
+	/*wheel1.draw();
 	wheel2.draw();
 	wheel3.draw();
 	wheel4.draw();
 	sciana1.draw();
 	sciana2.draw();
-	back.draw();
+	back.draw();*/
 	//front.draw();
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	top(0,0, 55,0,0,0);
+	cr.draw();
 	
 	//front.draw();
 
