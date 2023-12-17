@@ -95,7 +95,7 @@ void calcNormal(float v[3][3], float out[3])
 // Change viewing volume and viewport.  Called when window is resized
 void ChangeSize(GLsizei w, GLsizei h)
 {
-	GLfloat nRange = 300.0f;
+	GLfloat nRange = 90.0f;
 	GLfloat fAspect;
 	// Prevent a divide by zero
 	if (h == 0)
@@ -495,7 +495,7 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	//walec(40, 40);
 	/*sciana1.draw();
 	sciana2.draw();
