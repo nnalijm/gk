@@ -9,11 +9,9 @@ car::car(GLfloat length, GLfloat width, GLfloat height, GLfloat posX, GLfloat po
 	setPosX(posX);
 	setPosY(posY);
 	setPosZ(posZ);
-
-
-
 }
 
+// seters
 void car::setLength(GLfloat length) { this->length = length; }
 void car::setWidth(GLfloat width) { this->width = width; }
 void car::setHeight(GLfloat height) { this->height = height; }
@@ -21,6 +19,7 @@ void car::setPosX(GLfloat posX) { this->posX = posX; }
 void car::setPosY(GLfloat posY) { this->posY = posY; }
 void car::setPosZ(GLfloat posZ) { this->posZ = posZ; }
 
+// geters
 GLfloat car::getLength() const { return length; }
 GLfloat car::getWidth() const { return width; }
 GLfloat car::getHeight() const { return height; }
@@ -28,11 +27,10 @@ GLfloat car::getPosX() const { return posX; }
 GLfloat car::getPosY() const { return posY; }
 GLfloat car::getPosZ() const { return posZ; }
 
+// main draw function
+void car::draw() { drawBack(); drawSides(); }
 
-void car::draw() {
-	drawBack();
-}
-
+// draw back side functions
 void car::drawBackInPlate() const {
 	// inner back plate begin
 	glColor3f(0.55f, 0.f, 0.f);
@@ -68,12 +66,7 @@ void car::drawBackInPlate() const {
 	glEnd();
 	// inner back plate end
 }
-
-void car::drawBackHeadlight() const {
-	drawBackLeftHeadlight();
-	drawBackRightHeadlight();
-}
-
+void car::drawBackHeadlight() const { drawBackLeftHeadlight(); drawBackRightHeadlight(); }
 void car::drawBackRightHeadlight() const {
 	//right rigth headlight
 	glColor3f(1.f, 0.f, 0.f);
@@ -108,9 +101,9 @@ void car::drawBackRightHeadlight() const {
 	glBegin(GL_TRIANGLE_STRIP);
 	glVertex3f(-2 + getPosX(), getHeight() / 3 * 2 - 2 + getPosY(), getWidth() / 6 * 5 + getPosZ());
 	glVertex3f(-2 + getPosX(), getHeight() / 3 * 2 - 6.3 + getPosY(), getWidth() / 6 * 5 + getPosZ());
-	for (GLfloat x = -2.0 + getPosX(), y = getHeight() / 3 * 2 - 2 + getPosY(), z = (getWidth() / 6) * 5 + getPosZ(); z < getWidth()-2 + getPosZ(); z += 2.825) {
+	for (GLfloat x = -2.0 + getPosX(), y = getHeight() / 3 * 2 - 2 + getPosY(), z = (getWidth() / 6) * 5 + getPosZ(); z < getWidth() - 2 + getPosZ(); z += 2.825) {
 		glVertex3f(x, y, z);
-		glVertex3f(x, y-4.3, z);
+		glVertex3f(x, y - 4.3, z);
 	}
 	glEnd();
 
@@ -119,7 +112,7 @@ void car::drawBackRightHeadlight() const {
 	glBegin(GL_TRIANGLE_STRIP);
 	glVertex3f(0 + getPosX(), getHeight() / 3 * 2 + getPosY(), getWidth() / 3 * 2 + getPosZ());
 	glVertex3f(0 + getPosX(), getHeight() / 2 + getPosY(), getWidth() / 3 * 2 + getPosZ());
-	glVertex3f(-2 + getPosX(), getHeight() / 3 * 2 - 2 + getPosY(), getWidth()/3*2 + getPosZ());
+	glVertex3f(-2 + getPosX(), getHeight() / 3 * 2 - 2 + getPosY(), getWidth() / 3 * 2 + getPosZ());
 	glVertex3f(-2 + getPosX(), getHeight() / 2 + 2 + getPosY(), getWidth() / 3 * 2 + getPosZ());
 	glEnd();
 
@@ -140,13 +133,12 @@ void car::drawBackRightHeadlight() const {
 	glBegin(GL_TRIANGLE_STRIP);
 	glVertex3f(-2 + getPosX(), getHeight() / 3 * 2 - 2 + getPosY(), getWidth() / 3 * 2 + getPosZ());
 	glVertex3f(-2 + getPosX(), getHeight() / 3 * 2 - 6.3 + getPosY(), getWidth() / 3 * 2 + getPosZ());
-	for (GLfloat x = -2 + getPosX(), y = getHeight() / 3 * 2 - 2 + getPosY(), z = getWidth() / 3*2 + getPosZ(); z < (getWidth() / 6) * 5 + getPosZ(); z+=3.325) {
+	for (GLfloat x = -2 + getPosX(), y = getHeight() / 3 * 2 - 2 + getPosY(), z = getWidth() / 3 * 2 + getPosZ(); z < (getWidth() / 6) * 5 + getPosZ(); z += 3.325) {
 		glVertex3f(x, y, z);
 		glVertex3f(x, y - 4.3, z);
 	}
 	glEnd();
 }
-
 void car::drawBackLeftHeadlight() const {
 	//left left headlight
 	glColor3f(1.f, 0.f, 0.f);
@@ -220,7 +212,6 @@ void car::drawBackLeftHeadlight() const {
 	}
 	glEnd();
 }
-
 void car::drawBack() const{
 	glColor3f(1.f, 0.f, 0.f);
 
@@ -263,3 +254,82 @@ void car::drawBack() const{
 
 	
 }
+
+// draw sides functions
+void car::drawSides() const { drawLeftSide(); drawRightSide(); }
+void car::drawLeftSide() const{
+	glColor3f(1.f, 0.f, 0.f);
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(getPosX() + 0.f, getPosY() + 0.f, getPosZ() + 0.f);
+	glVertex3f(getPosX() + getLength() / 4, getPosY() + 0.f, getPosZ() + 0.f);
+	glVertex3f(getPosX() + 0.f, getPosY() + getHeight(), getPosZ() + 0.f);
+	glVertex3f(getPosX() + getLength() / 4, getPosY() + getHeight(), getPosZ() + 0.f);
+	glEnd();
+
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(getPosX() + getLength() / 4, getPosY() + 0.f, getPosZ() + 0.f);
+	glVertex3f(getPosX() + getLength() / 4, getPosY() + getHeight(), getPosZ() + 0.f);
+	glVertex3f(getPosX() + getLength() / 2, getPosY() + 0.f, getPosZ() + 0.f);
+	glVertex3f(getPosX() + getLength() / 2, getPosY() + getHeight(), getPosZ() + 0.f);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(getPosX() + getLength() / 2, getPosY() + 0.f, getPosZ() + 0.f);
+	glVertex3f(getPosX() + getLength() / 2, getPosY() + getHeight(), getPosZ() + 0.f);
+	glVertex3f(getPosX() + getLength() / 4 * 3, getPosY() + 0.f, getPosZ() + 0.f);
+	glVertex3f(getPosX() + getLength() / 4 * 3, getPosY() + getHeight(), getPosZ() + 0.f);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(getPosX() + getLength() / 4 * 3, getPosY() + 0.f, getPosZ() + 0.f);
+	glVertex3f(getPosX() + getLength() / 4 * 3, getPosY() + getHeight(), getPosZ() + 0.f);
+	glVertex3f(getPosX() + getLength(), getPosY() + 0.f, getPosZ() + 0.f);
+	glVertex3f(getPosX() + getLength(), getPosY() + getHeight(), getPosZ() + 0.f);
+	glEnd();
+
+}
+void car::drawRightSide() const{
+	glColor3f(1.f, 0.f, 0.f);
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(getPosX() + 0.f, getPosY() + 0.f, getPosZ() + getWidth());
+	glVertex3f(getPosX() + getLength() / 4, getPosY() + 0.f, getPosZ() + getWidth());
+	glVertex3f(getPosX() + 0.f, getPosY() + getHeight(), getPosZ() + getWidth());
+	glVertex3f(getPosX() + getLength() / 4, getPosY() + getHeight(), getPosZ() + getWidth());
+	glEnd();
+
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(getPosX() + getLength() / 4, getPosY() + 0.f, getPosZ() + getWidth());
+	glVertex3f(getPosX() + getLength() / 4, getPosY() + getHeight(), getPosZ() + getWidth());
+	glVertex3f(getPosX() + getLength() / 2, getPosY() + 0.f, getPosZ() + getWidth());
+	glVertex3f(getPosX() + getLength() / 2, getPosY() + getHeight(), getPosZ() + getWidth());
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(getPosX() + getLength() / 2, getPosY() + 0.f, getPosZ() + getWidth());
+	glVertex3f(getPosX() + getLength() / 2, getPosY() + getHeight(), getPosZ() + getWidth());
+	glVertex3f(getPosX() + getLength() / 4 * 3, getPosY() + 0.f, getPosZ() + getWidth());
+	glVertex3f(getPosX() + getLength() / 4 * 3, getPosY() + getHeight(), getPosZ() + getWidth());
+	glEnd();
+
+	glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(getPosX() + getLength() / 4 * 3, getPosY() + 0.f, getPosZ() + getWidth());
+	glVertex3f(getPosX() + getLength() / 4 * 3, getPosY() + getHeight(), getPosZ() + getWidth());
+	glVertex3f(getPosX() + getLength(), getPosY() + 0.f, getPosZ() + getWidth());
+	glVertex3f(getPosX() + getLength(), getPosY() + getHeight(), getPosZ() + getWidth());
+	glEnd();
+}
+
+// draw front side functions
+void car::drawFront() const {
+	drawFrontPlate();
+	drawFrontHeadlight();
+}
+void car::drawFrontHeadlight() const {
+	drawFrontLeftHeadlight();
+	drawFrontRightHeadlight();
+}
+void car::drawFrontLeftHeadlight() const{}
+void car::drawFrontRightHeadlight() const{}
+void car::drawFrontPlate() const{}

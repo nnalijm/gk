@@ -5,6 +5,7 @@
 #include "Front.h"
 #include "Back.h"
 #include "car.h"
+//#include "stb_image.h"
 
 // Color Palette handle
 HPALETTE hPalette = NULL;
@@ -509,9 +510,9 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	//walec(40, 40);
-	sciana1.draw();
+	//sciana1.draw();
 	/*sciana2.draw();
 	glColor3f(1.0, 0.0, 0.0);
 	front.draw();*/
