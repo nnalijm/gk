@@ -17,6 +17,8 @@ static HINSTANCE hInstance;
 static GLfloat xRot = 0.0f;
 static GLfloat yRot = 0.0f;
 
+static GLfloat xeye{ 0.f }, yeye{ 10.f }, zeye{ 100.f };
+
 
 static GLsizei lastHeight;
 static GLsizei lastWidth;
@@ -95,7 +97,7 @@ void calcNormal(float v[3][3], float out[3])
 // Change viewing volume and viewport.  Called when window is resized
 void ChangeSize(GLsizei w, GLsizei h)
 {
-	GLfloat nRange = 90.0f;
+	GLfloat nRange = 1000.0f;
 	GLfloat fAspect;
 	// Prevent a divide by zero
 	if (h == 0)
@@ -501,17 +503,18 @@ void RenderScene(void)
 	sciana2.draw();
 	glColor3f(1.0, 0.0, 0.0);
 	front.draw();*/
-	//gluLookAt(0.f, 10.f, 100.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f);
-	/*wheel1.draw();
+	gluLookAt(xeye, yeye, zeye, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f);
+	wheel1.draw();
 	wheel2.draw();
 	wheel3.draw();
 	wheel4.draw();
 	sciana1.draw();
 	sciana2.draw();
-	back.draw();*/
+	back.draw();
+	top(0,0,50,0,0,0);
 	//front.draw();
 
-	cr.draw();
+	//cr.draw();
 	
 	//front.draw();
 
@@ -862,17 +865,19 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		// Key press, check for arrow keys to do cube rotation.
 	case WM_KEYDOWN:
 	{
-		if (wParam == VK_UP)
-			xRot -= 5.0f;
+		if (wParam == VK_UP && yeye<495.f)
+			//xRot -= 5.0f;
+			yeye += 5.f;
+		if (wParam == VK_DOWN && yeye>-495.f)
+			//xRot += 5.0f;
+			yeye -= 5.f;
+		if (wParam == VK_LEFT && xeye>-495.f)
+			//yRot -= 5.0f;
+			xeye -= 5.f;
 
-		if (wParam == VK_DOWN)
-			xRot += 5.0f;
-
-		if (wParam == VK_LEFT)
-			yRot -= 5.0f;
-
-		if (wParam == VK_RIGHT)
-			yRot += 5.0f;
+		if (wParam == VK_RIGHT && xeye<495.f)
+			//yRot += 5.0f;
+			xeye += 5.f;
 
 		xRot = (const int)xRot % 360;
 		yRot = (const int)yRot % 360;
