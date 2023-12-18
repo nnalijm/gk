@@ -18,6 +18,7 @@ static GLfloat xRot = 0.0f;
 static GLfloat yRot = 0.0f;
 
 static GLfloat xeye{ 0.f }, yeye{ 10.f }, zeye{ 100.f };
+ GLfloat posX{ 0.f }, posY{ 0.f }, posZ{ 0.f };
 
 
 static GLsizei lastHeight;
@@ -97,7 +98,7 @@ void calcNormal(float v[3][3], float out[3])
 // Change viewing volume and viewport.  Called when window is resized
 void ChangeSize(GLsizei w, GLsizei h)
 {
-	GLfloat nRange = 1000.0f;
+	GLfloat nRange = 200.0f;
 	GLfloat fAspect;
 	// Prevent a divide by zero
 	if (h == 0)
@@ -479,7 +480,7 @@ void RenderScene(void)
 	GLfloat cameraFront[3] = {0.0f, 0.0f, -1.0f};
 	GLfloat cameraUp[3] = { 0.0f, 1.0f, 0.0f };
 
-	car cr = car(80, 80, 50);
+	car cr = car(80, 80, 50, posX, posY, posZ);
 
 	
 	//float normal[3];	// Storeage for calculated surface normal
@@ -503,7 +504,9 @@ void RenderScene(void)
 	sciana2.draw();
 	glColor3f(1.0, 0.0, 0.0);
 	front.draw();*/
-	gluLookAt(xeye, yeye, zeye, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f);
+
+	//main car 
+	/*gluLookAt(xeye, yeye, zeye, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f);
 	wheel1.draw();
 	wheel2.draw();
 	wheel3.draw();
@@ -511,10 +514,13 @@ void RenderScene(void)
 	sciana1.draw();
 	sciana2.draw();
 	back.draw();
-	top(0,0,50,0,0,0);
+	top(0,0,50,0,0,0);*/
+
+
+
 	//front.draw();
 
-	//cr.draw();
+	cr.draw();
 	
 	//front.draw();
 
@@ -865,19 +871,36 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		// Key press, check for arrow keys to do cube rotation.
 	case WM_KEYDOWN:
 	{
-		if (wParam == VK_UP && yeye<495.f)
-			//xRot -= 5.0f;
-			yeye += 5.f;
-		if (wParam == VK_DOWN && yeye>-495.f)
-			//xRot += 5.0f;
-			yeye -= 5.f;
-		if (wParam == VK_LEFT && xeye>-495.f)
-			//yRot -= 5.0f;
-			xeye -= 5.f;
+		if (wParam == VK_UP)
+			xRot -= 5.0f;
+			//yeye += 5.f;
+		if (wParam == VK_DOWN)
+			xRot += 5.0f;
+			//yeye -= 5.f;
+		if (wParam == VK_LEFT)
+			yRot -= 5.0f;
+			
+		if (wParam == VK_RIGHT)
+			yRot += 5.0f;
 
-		if (wParam == VK_RIGHT && xeye<495.f)
-			//yRot += 5.0f;
-			xeye += 5.f;
+		// w key move forward
+		if (wParam == 0x57)
+			posX += 1.f;
+		// d key move back
+		if (wParam == 0x53)
+			posX -= 1.f;
+		// a key move left
+		if (wParam == 0x41)
+			posZ -= 1.f;
+		// d key move rigth
+		if (wParam == 0x44)
+			posZ += 1.f;
+		// q key move up
+		if (wParam == 0x51)
+			posY += 1.f;
+		// e key move down
+		if (wParam == 0x45)
+			posY -= 1.f;
 
 		xRot = (const int)xRot % 360;
 		yRot = (const int)yRot % 360;
