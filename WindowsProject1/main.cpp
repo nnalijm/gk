@@ -18,8 +18,19 @@ static GLfloat xRot = 0.0f;
 static GLfloat yRot = 0.0f;
 
 static GLfloat xeye{ 0.f }, yeye{ 10.f }, zeye{ 100.f };
- GLfloat posX{ 0.f }, posY{ 0.f }, posZ{ 0.f };
 
+GLfloat posX{ 0.f }, posY{ 0.f }, posZ{ 0.f };
+GLfloat yAngleRotate{ 0.f };
+GLfloat yAngleStep{ 2.f };
+
+bool keyWPressed{ false };
+bool keySPressed{ false };
+bool keyAPressed{ false };
+bool keyDPressed{ false };
+bool keyQPressed{ false };
+bool keyEPressed{ false };
+bool keyXPressed{ false };
+bool keyZPressed{ false };
 
 static GLsizei lastHeight;
 static GLsizei lastWidth;
@@ -500,8 +511,8 @@ void RenderScene(void)
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	//walec(40, 40);
-	/*sciana1.draw();
-	sciana2.draw();
+	sciana1.draw();
+	/*sciana2.draw();
 	glColor3f(1.0, 0.0, 0.0);
 	front.draw();*/
 
@@ -517,14 +528,27 @@ void RenderScene(void)
 	top(0,0,50,0,0,0);*/
 
 
-
-	//front.draw();
-
+	if (keyWPressed)
+		posX += 1.f;
+	if (keySPressed)
+		posX -= 1.f;
+	if (keyAPressed)
+		posZ -= 1.f;
+	if (keyDPressed)
+		posZ += 1.f;
+	if (keyQPressed)
+		posY += 1.f;
+	if (keyEPressed)
+		posY -= 1.f;
+	if (keyXPressed)
+		yAngleRotate += yAngleStep;
+	if (keyZPressed)
+		yAngleRotate -= yAngleStep;
+	//glRotatef(yAngleRotate, 0.f, 1.f, 0.f);
+	//glPushMatrix();
+	//glTranslatef(0,0,40);
 	cr.draw();
-	
-	//front.draw();
-
-	//back.draw();
+	//glPopMatrix();
 
 	
 	//Uzyskanie siatki:
@@ -871,44 +895,79 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		// Key press, check for arrow keys to do cube rotation.
 	case WM_KEYDOWN:
 	{
-		if (wParam == VK_UP)
+		switch (wParam) {
+		case 0x57: // W
+			keyWPressed = true;
+			break;
+		case 0x53: // S
+			keySPressed = true;
+			break;
+		case 0x41: // A
+			keyAPressed = true;
+			break;
+		case 0x44: // D
+			keyDPressed = true;
+			break;
+		case 0x51: // Q
+			keyQPressed = true;
+			break;
+		case 0x45: // E
+			keyEPressed = true;
+			break;
+		case 0x58: // X
+			keyXPressed = true;
+			break;
+		case 0x5A: // Z
+			keyZPressed = true;
+			break;
+		case VK_UP:
 			xRot -= 5.0f;
-			//yeye += 5.f;
-		if (wParam == VK_DOWN)
+			break;
+		case VK_DOWN:
 			xRot += 5.0f;
-			//yeye -= 5.f;
-		if (wParam == VK_LEFT)
+			break;
+		case VK_LEFT:
 			yRot -= 5.0f;
-			
-		if (wParam == VK_RIGHT)
+			break;
+		case VK_RIGHT:
 			yRot += 5.0f;
-
-		// w key move forward
-		if (wParam == 0x57)
-			posX += 1.f;
-		// d key move back
-		if (wParam == 0x53)
-			posX -= 1.f;
-		// a key move left
-		if (wParam == 0x41)
-			posZ -= 1.f;
-		// d key move rigth
-		if (wParam == 0x44)
-			posZ += 1.f;
-		// q key move up
-		if (wParam == 0x51)
-			posY += 1.f;
-		// e key move down
-		if (wParam == 0x45)
-			posY -= 1.f;
-
+			break;
+		}
 		xRot = (const int)xRot % 360;
 		yRot = (const int)yRot % 360;
 
 		InvalidateRect(hWnd, NULL, FALSE);
 	}
 	break;
-
+	case WM_KEYUP: {
+		switch (wParam) {
+		case 0x57: // W
+			keyWPressed = false;
+			break;
+		case 0x53: // S
+			keySPressed = false;
+			break;
+		case 0x41: // A
+			keyAPressed = false;
+			break;
+		case 0x44: // D
+			keyDPressed = false;
+			break;
+		case 0x51: // Q
+			keyQPressed = false;
+			break;
+		case 0x45: // E
+			keyEPressed = false;
+			break;
+		case 0x58: // X
+			keyXPressed = false;
+			break;
+		case 0x5A: // Z
+			keyZPressed = false;
+			break;
+		}
+		break;
+	}
 	// A menu command
 	case WM_COMMAND:
 	{
