@@ -5,6 +5,7 @@
 #define  _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
+#include <vector>
 
 // £adowanie bibliotek:
 
@@ -28,11 +29,23 @@
 #      undef UNICODE 
 #   endif
 #endif
-#include <windows.h>            // Window defines
-#include <gl\gl.h>              // OpenGL
-#include <gl\glu.h>             // GLU library
+#include <windows.h>            // Window defines              // OpenGL
+            // GLU library
 #include <math.h>				// Define for sqrt
 #include <stdio.h>
+#include <stdlib.h>
+#include "GL\glew.h"
+//#include <gl\glu.h> 
+//#include <gl\gl.h>
+//#include "GLFW/glfw3.h"
+
+#include "glm\glm.hpp"
+#include "glm\gtc\matrix_transform.hpp"
+using namespace glm;
+#include "common/shader.hpp"
+#include "common/texture.hpp"
+#include "common/controls.hpp"
+
 #include "Resource.h"           // About box resource identifiers.
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)

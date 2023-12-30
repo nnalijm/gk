@@ -5,7 +5,9 @@
 #include "Front.h"
 #include "Back.h"
 #include "car.h"
-//#include "stb_image.h"
+#include "Podloze.h"
+
+
 
 // Color Palette handle
 HPALETTE hPalette = NULL;
@@ -17,21 +19,7 @@ static HINSTANCE hInstance;
 // Rotation amounts
 static GLfloat xRot = 0.0f;
 static GLfloat yRot = 0.0f;
-
-static GLfloat xeye{ 0.f }, yeye{ 10.f }, zeye{ 100.f };
-
-GLfloat posX{ 0.f }, posY{ 0.f }, posZ{ 0.f };
-GLfloat yAngleRotate{ 0.f };
-GLfloat yAngleStep{ 2.f };
-
-bool keyWPressed{ false };
-bool keySPressed{ false };
-bool keyAPressed{ false };
-bool keyDPressed{ false };
-bool keyQPressed{ false };
-bool keyEPressed{ false };
-bool keyXPressed{ false };
-bool keyZPressed{ false };
+SideSciana sciana1 = SideSciana(150, 20, 30, -70, 60, 0);
 
 static GLsizei lastHeight;
 static GLsizei lastWidth;
@@ -39,7 +27,7 @@ static GLsizei lastWidth;
 // Opis tekstury
 BITMAPINFOHEADER	bitmapInfoHeader;	// nag³ówek obrazu
 unsigned char* bitmapData;			// dane tekstury
-unsigned int		texture[2];			// obiekt tekstury
+unsigned int		texture[4];			// obiekt tekstury
 
 
 // Declaration for Window procedure
@@ -110,7 +98,7 @@ void calcNormal(float v[3][3], float out[3])
 // Change viewing volume and viewport.  Called when window is resized
 void ChangeSize(GLsizei w, GLsizei h)
 {
-	GLfloat nRange = 200.0f;
+	GLfloat nRange = 90.0f;
 	GLfloat fAspect;
 	// Prevent a divide by zero
 	if (h == 0)
@@ -174,6 +162,9 @@ unsigned char* LoadBitmapFile(char* filename, BITMAPINFOHEADER* bitmapInfoHeader
 		fclose(filePtr);
 		return NULL;
 	}
+
+	if (glewInit() != GLEW_OK)
+		printf("Error\n");
 
 	// wczytuje nag³ówek obrazu
 	fread(bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, filePtr);
@@ -479,7 +470,7 @@ void top( float length, float width, float heigth, float posX, const float posY,
 void RenderScene(void)
 {
 	//Top top = Top(50, 20, 30, 0, 0, 0);
-	Wheel wheel1 = Wheel(15, 15, 70, 0, 0);
+	/*Wheel wheel1 = Wheel(15, 15, 70, 0, 0);
 	Wheel wheel2 = Wheel(15, 15, 70, 60, 0);
 	Wheel wheel3 = Wheel(15, 15, -40, 0, 0);
 	Wheel wheel4 = Wheel(15, 15, -40, 60, 0);
@@ -492,9 +483,10 @@ void RenderScene(void)
 	GLfloat cameraFront[3] = {0.0f, 0.0f, -1.0f};
 	GLfloat cameraUp[3] = { 0.0f, 1.0f, 0.0f };
 
-	car cr = car(80, 80, 50, posX, posY, posZ);
+	car cr = car(80, 80, 50);*/
 
 	
+	Podloze podloze;
 	//float normal[3];	// Storeage for calculated surface normal
 
 	// Clear the window with current clearing color
@@ -510,46 +502,36 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	//walec(40, 40);
-	//sciana1.draw();
-	/*sciana2.draw();
+	/*sciana1.draw();
+	sciana2.draw();
 	glColor3f(1.0, 0.0, 0.0);
 	front.draw();*/
-
-	//main car 
-	/*gluLookAt(xeye, yeye, zeye, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f);
-	wheel1.draw();
+	//gluLookAt(0.f, 10.f, 100.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f);
+	/*wheel1.draw();
 	wheel2.draw();
 	wheel3.draw();
 	wheel4.draw();
 	sciana1.draw();
 	sciana2.draw();
-	back.draw();
-	top(0,0,50,0,0,0);*/
+	back.draw();*/
+	//front.draw();
 
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texture[0]);
+	glBegin(GL_QUADS);
+	glNormal3d(0, 0, 1);
+	glTexCoord2d(1.0, 1.0); glVertex3d(60, 10, 20);
+	glTexCoord2d(0.0, 1.0); glVertex3d(30, 10, 20);
+	glTexCoord2d(0.0, 0.0); glVertex3d(30, 0, 20);
+	glTexCoord2d(1.0, 0.0); glVertex3d(60, 0, 20);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+	
+	//front.draw();
 
-	if (keyWPressed)
-		posX += 1.f;
-	if (keySPressed)
-		posX -= 1.f;
-	if (keyAPressed)
-		posZ -= 1.f;
-	if (keyDPressed)
-		posZ += 1.f;
-	if (keyQPressed)
-		posY += 1.f;
-	if (keyEPressed)
-		posY -= 1.f;
-	if (keyXPressed)
-		yAngleRotate += yAngleStep;
-	if (keyZPressed)
-		yAngleRotate -= yAngleStep;
-	//glRotatef(yAngleRotate, 0.f, 1.f, 0.f);
-	//glPushMatrix();
-	//glTranslatef(0,0,40);
-	cr.draw();
-	//glPopMatrix();
+	//back.draw();
 
 	
 	//Uzyskanie siatki:
@@ -771,10 +753,10 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		hRC = wglCreateContext(hDC);
 		wglMakeCurrent(hDC, hRC);
 		SetupRC();
-		glGenTextures(2, &texture[0]);                  // tworzy obiekt tekstury			
+		glGenTextures(4, &texture[0]);                  // tworzy obiekt tekstury			
 
 		// ³aduje pierwszy obraz tekstury:
-		bitmapData = LoadBitmapFile((char*)"Bitmapy\\checker.bmp", &bitmapInfoHeader);
+		bitmapData = LoadBitmapFile((char*)"thumbnail.dib", &bitmapInfoHeader);
 
 		glBindTexture(GL_TEXTURE_2D, texture[0]);       // aktywuje obiekt tekstury
 
@@ -896,79 +878,25 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		// Key press, check for arrow keys to do cube rotation.
 	case WM_KEYDOWN:
 	{
-		switch (wParam) {
-		case 0x57: // W
-			keyWPressed = true;
-			break;
-		case 0x53: // S
-			keySPressed = true;
-			break;
-		case 0x41: // A
-			keyAPressed = true;
-			break;
-		case 0x44: // D
-			keyDPressed = true;
-			break;
-		case 0x51: // Q
-			keyQPressed = true;
-			break;
-		case 0x45: // E
-			keyEPressed = true;
-			break;
-		case 0x58: // X
-			keyXPressed = true;
-			break;
-		case 0x5A: // Z
-			keyZPressed = true;
-			break;
-		case VK_UP:
+		if (wParam == VK_UP)
 			xRot -= 5.0f;
-			break;
-		case VK_DOWN:
+
+		if (wParam == VK_DOWN)
 			xRot += 5.0f;
-			break;
-		case VK_LEFT:
+
+		if (wParam == VK_LEFT)
 			yRot -= 5.0f;
-			break;
-		case VK_RIGHT:
+
+		if (wParam == VK_RIGHT)
 			yRot += 5.0f;
-			break;
-		}
+
 		xRot = (const int)xRot % 360;
 		yRot = (const int)yRot % 360;
 
 		InvalidateRect(hWnd, NULL, FALSE);
 	}
 	break;
-	case WM_KEYUP: {
-		switch (wParam) {
-		case 0x57: // W
-			keyWPressed = false;
-			break;
-		case 0x53: // S
-			keySPressed = false;
-			break;
-		case 0x41: // A
-			keyAPressed = false;
-			break;
-		case 0x44: // D
-			keyDPressed = false;
-			break;
-		case 0x51: // Q
-			keyQPressed = false;
-			break;
-		case 0x45: // E
-			keyEPressed = false;
-			break;
-		case 0x58: // X
-			keyXPressed = false;
-			break;
-		case 0x5A: // Z
-			keyZPressed = false;
-			break;
-		}
-		break;
-	}
+
 	// A menu command
 	case WM_COMMAND:
 	{
@@ -998,9 +926,6 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 
 	return (0L);
 }
-
-
-
 
 // Dialog procedure.
 BOOL APIENTRY AboutDlgProc(HWND hDlg, UINT message, UINT wParam, LONG lParam)
